@@ -1,0 +1,39 @@
+
+const apiUrl = 'https://example.com/api/books';
+
+function searchBooksByTitle(title) {
+
+  const searchUrl = `${apiUrl}/search?title=${encodeURIComponent(title)}`;
+
+  return new Promise((resolve, reject) => {
+    // Fetch data from the API using fetch
+    fetch(searchUrl)
+      .then((response) => {
+    
+        if (!response.ok) {
+          throw new Error('Failed to search books by title');
+        }
+      
+        return response.json();
+      })
+      .then((books) => {
+  
+        resolve(books);
+      })
+      .catch((error) => {
+       
+        reject(error);
+      });
+  });
+}
+
+const title = 'JavaScript'; // Example title
+searchBooksByTitle(title)
+  .then((books) => {
+    console.log('Books found:', books);
+   
+  })
+  .catch((error) => {
+    console.error('Error searching books by title:', error);
+ 
+  });
