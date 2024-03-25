@@ -1,0 +1,34 @@
+
+const apiUrl = 'https://example.com/api/books';
+
+async function getAllBooks() {
+  try {
+   
+    const response = await fetch(apiUrl);
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch books');
+    }
+
+    
+    const books = await response.json();
+    
+    // Return the array of books
+    return books;
+  } catch (error) {
+    
+    console.error('Error fetching books:', error);
+   
+    throw error;
+  }
+}
+
+
+getAllBooks()
+  .then((books) => {
+    console.log('Fetched books:', books);
+  })
+  .catch((error) => {
+    console.error('Error fetching books:', error);
+  
+  });
